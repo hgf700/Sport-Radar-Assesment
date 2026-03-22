@@ -21,14 +21,24 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Event>()
             .HasOne(e => e.HomeTeam)
             .WithMany()
-            .HasForeignKey(e => e.HomeTeamId)
+            .HasForeignKey(e => e._HomeTeamId)
             .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Event>()
             .HasOne(e => e.AwayTeam)
             .WithMany()
-            .HasForeignKey(e => e.AwayTeamId)
+            .HasForeignKey(e => e._AwayTeamId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Event>()
+            .HasOne(e => e.Sport)
+            .WithMany()
+            .HasForeignKey(e => e._SportId);
+
+        modelBuilder.Entity<Event>()
+            .HasOne(e => e.Venue)
+            .WithMany()
+            .HasForeignKey(e => e._VenueId);
 
         base.OnModelCreating(modelBuilder);
     }

@@ -1,4 +1,6 @@
+using Backend.DB;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,8 @@ var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 var connectionString =
     $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
 
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
