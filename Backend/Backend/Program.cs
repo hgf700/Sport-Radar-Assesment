@@ -22,6 +22,18 @@ var connectionString =
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:5000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+    );
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +45,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 
