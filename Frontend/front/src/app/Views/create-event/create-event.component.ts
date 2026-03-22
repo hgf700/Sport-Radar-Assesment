@@ -42,20 +42,20 @@ export class CreateEventComponent {
   }
 
   showEventsView() {
-    this.router.navigate(['/show-events']);
+    this.router.navigate(['/']);
   }
 
-  // onSubmit() {
-  //   this.submitted = true;
+  onSubmit() {
+    this.submitted = true;
 
-  //   if (this.createEventForm.invalid) return;
+    if (this.createEventForm.invalid) return;
 
-  //   this.eventService.createEvent().subscribe({
-  //     next: () => {
-
-  //     },
-  //     error: (err) => alert(err.error),
-  //   });
-  // }
+    this.eventService.createEvent(this.createEventForm.value).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => alert(err.error),
+    });
+  }
 
 }

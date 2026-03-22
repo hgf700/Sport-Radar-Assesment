@@ -37,6 +37,6 @@ export class ShowEventsComponent implements OnInit{
   }
 
   createEventView() {
-    this.router.navigate(['/show-events']);
+    this.router.navigate(['/create-event']);
   }
 }

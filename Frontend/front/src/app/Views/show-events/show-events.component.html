@@ -1,5 +1,6 @@
-<main class="main">
+<button (click)="createEventView()">createEventView</button><br />
 
+<main class="main">
   <ul *ngIf="event.length > 0">
     <li *ngFor="let e of event">
       {{ e.id }} 
