@@ -1,2 +1,58 @@
-# Sport-Radar-Assesment
+# Sport Radar Assessment
 
+This project was created as part of a recruitment assessment.  
+The main focus of the project is the backend implementation.
+
+## 🛠 Tech Stack
+
+**Backend:**
+- ASP.NET Core (C#)
+- PostgreSQL
+
+**Frontend:**
+- Angular
+
+## 🚀 Backend Implementation
+
+The backend was built using ASP.NET Core Web API and includes:
+
+- PostgreSQL database connection configured via `.env`
+- CORS configuration to enable communication with the frontend
+- REST API controller for:
+  - retrieving events
+  - creating new events
+- Entity models used for database structure
+- DTOs (Data Transfer Objects) used for communication between backend and frontend
+
+## 🎨 Frontend Implementation
+
+The frontend was built using Angular and includes:
+
+- DTO interfaces for handling data from the backend
+- Services for managing API endpoints and HTTP communication
+- Routing between pages
+- Two main views:
+  - **Show Events**
+    - displays all events or a selected event
+  - **Create Event**
+    - form for creating a new event
+    - after submission, redirects to the events view
+
+## 🔄 Application Flow
+
+1. User opens the application and views the list of events  
+2. User can navigate to the "Create Event" page  
+3. After submitting the form:
+   - data is sent to the backend  
+   - new event is saved in the database  
+   - user is redirected back to the events list  
+
+## ▶️ How to Run
+
+### Backend
+```bash
+dotnet run
+
+### Frontend
+```bash
+npm start
