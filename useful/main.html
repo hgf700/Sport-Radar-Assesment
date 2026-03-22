@@ -13,25 +13,12 @@
 <body>
 
 <nav>
-    <a href="#">Home</a>
-    <a href="#">Events</a>
-    <a href="#">Contact</a>
+    <a href="createEvent.html">Create Event</a>
 </nav>
 
 <h1>Wydarzenia</h1>
 
 <div id="events"></div>
-
-<h2>Dodaj wydarzenie</h2>
-
-<form id="eventForm">
-    <input placeholder="Sport" id="sport"><br>
-    <input placeholder="Data" id="date"><br>
-    <input placeholder="Godzina" id="time"><br>
-    <input placeholder="Uczestnicy" id="participants"><br>
-    <button type="submit">Dodaj</button>
-</form>
-
 
 <script>
 fetch('/api/events')
@@ -43,9 +30,15 @@ fetch('/api/events')
             const div = document.createElement('div');
             div.className = 'event';
             div.innerHTML = `
-                <h3>${e.sport}</h3>
-                <p>${e.date} ${e.time}</p>
-                <p>${e.participants}</p>
+                <h3>${e.id}</h3>
+                <p>${e.dateTime}</p>
+                <p>${e.description}</p>
+                <p>${e.sportName}</p>
+                <p>${e.homeTeamName}</p>
+                <p>${e.awayTeamName}</p>
+                <p>${e.venueName}</p>
+                <p>${e.venueCity}</p>
+
             `;
             container.appendChild(div);
         });

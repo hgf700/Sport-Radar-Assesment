@@ -1,0 +1,8 @@
+npm start
+
+ng generate component Views/
+
+cd ProjectFront/src/app
+
+#prettier
+npx prettier --write src/
