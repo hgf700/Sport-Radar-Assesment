@@ -27,7 +27,6 @@ export class CreateEventComponent {
   constructor(
     private eventService: EventService,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
   ) {
     this.createEventForm = this.fb.group({

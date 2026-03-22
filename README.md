@@ -49,12 +49,12 @@ The frontend was built using Angular and includes:
 
 ### ▶️ How to Run
 
-# Frontend
-```bash
-cd Backend
-dotnet run
+**Backend**
+    ```bash
+    cd Backend
+    dotnet run
 
-# Frontend
-```bash
-cd Frontend/front
-npm start
+**Frontend**
+    ```bash
+    cd Frontend/front
+    npm start

@@ -1,0 +1,8 @@
+I used AI to help with several aspects of the project:
+
+- Choosing the architectural approach for the backend and frontend  
+- Correcting and refining the database structure  
+- Handling initial dependencies and configuring Angular to work correctly  
+- Identifying potential edge cases and improving application logic and to refactor
+- Generating CSS
+- Correcting syntax and README documentation to improve code syntax consistency 
