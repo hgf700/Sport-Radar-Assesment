@@ -47,12 +47,14 @@ The frontend was built using Angular and includes:
    - new event is saved in the database  
    - user is redirected back to the events list  
 
-## ▶️ How to Run
+### ▶️ How to Run
 
-### Backend
+# Frontend
 ```bash
+cd Backend
 dotnet run
 
-### Frontend
+# Frontend
 ```bash
+cd Frontend/front
 npm start
