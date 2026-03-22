@@ -1,10 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+DotNetEnv.Env.Load();
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+//swagger
 builder.Services.AddOpenApi();
+
+var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+var db = Environment.GetEnvironmentVariable("POSTGRES_DB");
+var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
+var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+
+var connectionString =
+    $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
