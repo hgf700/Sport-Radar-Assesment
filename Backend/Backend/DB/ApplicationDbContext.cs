@@ -1,33 +1,35 @@
-﻿//using Microsoft.EntityFrameworkCore;
-//using System.Text.Json;
-//using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Backend.Models;
 
-//namespace Backend.DB;
+namespace Backend.DB;
 
-//public class ApplicationDbContext
-//{
-//    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-//        : base(options)
-//    {
-//    }
-//    public DbSet<Movie> Movies { get; set; }
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+    }
+    public DbSet<Event> Events { get; set; }
+    public DbSet<Sport> Sports{ get; set; }
+    public DbSet<Team> Teams { get; set; }
+    public DbSet<Venue> Venues{ get; set; }
 
-//    protected override void OnModelCreating(ModelBuilder modelBuilder)
-//    {
-//        base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Event>()
+            .HasOne(e => e.HomeTeam)
+            .WithMany()
+            .HasForeignKey(e => e.HomeTeamId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-//        modelBuilder.Entity<MoviePeopleRole>()
-//            .HasKey(mg => new { mg.MovieId, mg.PeopleRolesId });
+        modelBuilder.Entity<Event>()
+            .HasOne(e => e.AwayTeam)
+            .WithMany()
+            .HasForeignKey(e => e.AwayTeamId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-//        modelBuilder.Entity<MoviePeopleRole>()
-//            .HasOne(mg => mg.Movie)
-//            .WithMany(g => g.MoviePeopleRole)
-//            .HasForeignKey(mg => mg.MovieId);
-
-//        modelBuilder.Entity<MoviePeopleRole>()
-//            .HasOne(mg => mg.PeopleRole)
-//            .WithMany(g => g.MoviePeopleRole)
-//            .HasForeignKey(mg => mg.PeopleRolesId);
-
-//    }
-//}
+        base.OnModelCreating(modelBuilder);
+    }
+}

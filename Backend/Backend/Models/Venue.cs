@@ -2,10 +2,10 @@
 
 namespace Backend.Models;
 
-public class Team
+public class Venue
 {
     [Key]
     public int Id { get; set; }
-    public string NameOfTeam { get; set; }
-    public string TeamInformation { get; set; }
+    public string Name { get; set; }
+    public string City { get; set; }
 }
