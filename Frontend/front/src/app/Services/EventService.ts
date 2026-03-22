@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { eventDto } from '../Dto/event';
+import { eventDto } from '../Dto/eventDto';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
@@ -18,9 +18,7 @@ export class EventService {
     return this.http.get<eventDto[]>(`${this.apiUrl}/show-selected-event${eventId}`, {});
   }
 
-  // createEvent(email: string) {
-  //   const token = localStorage.getItem('jwt');
-  //   const headers = { Authorization: `Bearer ${token}` };
-  //   return this.http.post(`${this.apiUrl}/add-friend`, { email }, { headers });
-  // }
+  createEvent(email: string) {
+    return this.http.post(`${this.apiUrl}/create-new-event`, { email });
+  }
 }

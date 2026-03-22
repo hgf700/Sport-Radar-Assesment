@@ -1,1 +1,16 @@
-<p>show-events works!</p>
+<main class="main">
+
+  <ul *ngIf="event.length > 0">
+    <li *ngFor="let e of event">
+      {{ e.id }} 
+      {{ e.dateTime }}
+      {{ e.description }}
+      {{ e.sportName }}
+      {{ e.homeTeamName }}
+      {{ e.awayTeamName }}
+      {{ e.venueName }}
+      {{ e.venueCity }}
+    </li>
+  </ul>
+  <p *ngIf="event.length === 0">Brak eventow</p>
+</main>

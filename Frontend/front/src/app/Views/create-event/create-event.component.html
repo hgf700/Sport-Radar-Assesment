@@ -1,1 +1,7 @@
 <p>create-event works!</p>
+<div>
+    <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="text" />
+    <button type="submit">stworz event</button>
+  </form>
+</div>
