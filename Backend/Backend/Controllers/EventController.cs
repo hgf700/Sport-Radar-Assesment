@@ -1,4 +1,6 @@
 ﻿using Backend.DB;
+using Backend.Models;
+using Backend.Models.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,24 +21,63 @@ public class EventController : ControllerBase
     }
 
     [HttpGet("show-events")]
-    public async Task<IActionResult> ShowEvents()
+    public async Task<ActionResult<getEvents>> ShowEvents()
     {
-        var events = await _context.Events.ToListAsync();
+        var ev = await _context.Events
+           .Include(e => e.Sport)
+           .Include(e => e.HomeTeam)
+           .Include(e => e.AwayTeam)
+           .Include(e => e.Venue)
+           .ToListAsync();
 
-        return Ok(events);
+        if (ev == null)
+            return NotFound();
+
+        var eventsDto = ev.Select(ev => new getEvents
+        {
+            id = ev.Id,
+            dateTime = ev.DateTime,
+            description = ev.Description,
+            sportName = ev.Sport.SportName,
+            homeTeamName = ev.HomeTeam.NameOfTeam,
+            awayTeamName = ev.AwayTeam.NameOfTeam,
+            venueName = ev.Venue.Name,
+            venueCity = ev.Venue.City
+        }).ToList();
+
+        return Ok(eventsDto);
     }
 
     [HttpGet("show-selected-event/{eventId}")]
-    public async Task<IActionResult> ShowSelectedEvent(int eventId)
+    public async Task<ActionResult<getSelectedEvent>>ShowSelectedEvent(int eventId)
     {
+        var ev = await _context.Events
+            .Include(e => e.Sport)
+            .Include(e => e.HomeTeam)
+            .Include(e => e.AwayTeam)
+            .Include(e => e.Venue)
+            .FirstOrDefaultAsync(e => e.Id == eventId);
 
-        var selectedEvent= await _context.Events.FirstOrDefaultAsync(e => e.Id== eventId);
+        if (ev == null)
+            return NotFound();
 
-        return Ok(selectedEvent);
+        var dto = new getSelectedEvent
+        {
+            id = ev.Id,
+            dateTime = ev.DateTime,
+            description = ev.Description,
+            sportName = ev.Sport.SportName,
+            homeTeamName = ev.HomeTeam.NameOfTeam,
+            awayTeamName = ev.AwayTeam.NameOfTeam,
+            venueName = ev.Venue.Name,
+            venueCity = ev.Venue.City
+        };
+
+        return dto;
     }
 
     [HttpPost("create-new-event")]
-    public async Task<IActionResult> CreateNewEvent()
+    public async Task<IActionResult> CreateNewEvent([FromBody] postCreateEvent dto)
     {
 
         return Ok();
