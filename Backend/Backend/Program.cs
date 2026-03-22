@@ -17,19 +17,19 @@ var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
 var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 
+//connecting db
 var connectionString =
     $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
 
-//connection db
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 //cors
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
+    options.AddPolicy("AllowAngular",
         policy => policy
-            .WithOrigins("http://localhost:5500")
+            .WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
@@ -49,7 +49,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 //usage cors
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAngular");
 
 app.MapControllers();
 
