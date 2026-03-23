@@ -17,3 +17,13 @@ th {
 tr:nth-child(even) {
   background-color: #fafafa;
 }
+
+/* formularz jako "card" */
+form {
+  display: flex;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
