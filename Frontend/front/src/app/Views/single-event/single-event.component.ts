@@ -5,32 +5,24 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { eventDto } from '../../Dto/eventDto';
 import { sportNameEnum } from '../../enum/sportNameEnum';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-show-events',
-  imports: [CommonModule, ReactiveFormsModule,  RouterModule],
+  selector: 'app-single-event',
+  imports: [CommonModule, RouterModule],
   standalone: true,
-  templateUrl: './show-events.component.html',
-  styleUrl: './show-events.component.css'
+  templateUrl: './single-event.component.html',
+  styleUrl: './single-event.component.css'
 })
-export class ShowEventsComponent implements OnInit{
+export class SingleEventComponent implements OnInit{
   event: eventDto[] = [];
-  selectSingleEventForm!: FormGroup;
-  submitted = false;
 
   constructor(
     private eventService: EventService,
     private router: Router,
-    private fb: FormBuilder,
-  ) {
-    this.selectSingleEventForm = this.fb.group({
-      eventId: [''],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.loadEvents();
+    this.loadSingleEvent();
   }
 
   sportMap: Record<number, string> = {
@@ -38,7 +30,7 @@ export class ShowEventsComponent implements OnInit{
     [sportNameEnum.Ice_Hockey]: 'hokej na lodzie'
   };
 
-  loadEvents() {
+  loadSingleEvent() {
     this.eventService.getEvents().subscribe({
       next: (data) => {
         this.event = data;
@@ -47,18 +39,5 @@ export class ShowEventsComponent implements OnInit{
         console.error(err);
       },
     });
-  }
-
-  createEventView() {
-    this.router.navigate(['/create-event']);
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    if (this.selectSingleEventForm.invalid) return;
-
-    const id = this.selectSingleEventForm.value.eventId;
-
-    this.router.navigate(['/single-event', id]);
   }
 }

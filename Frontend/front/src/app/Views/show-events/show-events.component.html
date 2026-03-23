@@ -1,5 +1,13 @@
 <button (click)="createEventView()">View to create events</button><br />
 
+<div>
+  <form [formGroup]="selectSingleEventForm" (ngSubmit)="onSubmit()">
+
+    <input formControlName="eventId" placeholder="insert Event Id" /><br>
+    <button type="submit">search single event</button>
+  </form>
+</div>
+
 <main class="main">
   <ul *ngIf="event.length > 0">
     <thead>
