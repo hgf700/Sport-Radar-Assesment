@@ -14,7 +14,7 @@ export class EventService {
     return this.http.get<eventDto[]>(`${this.apiUrl}/show-events`, {});
   }
 
-  getSingleEvent(eventId: number) {
+  getSingleEvent(eventId: string) {
     return this.http.get<eventDto[]>(`${this.apiUrl}/show-selected-event${eventId}`, {});
   }
 

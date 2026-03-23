@@ -1,1 +1,35 @@
-<p>single-event works!</p>
+<button (click)="showEventsView()">View to events</button><br />
+
+<main class="main">
+  <ul *ngIf="event.length > 0">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Data</th>
+      <th>Opis</th>
+      <th>Sport</th>
+      <th>Home</th>
+      <th>Away</th>
+      <th>Venue</th>
+      <th>City</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr *ngFor="let e of event">
+      <td>{{ e.id }}</td>
+      <td>{{ e.dateTime | date:'yyyy-MM-dd HH:mm' }}</td>
+      <td>{{ e.description }}</td>
+      <td>{{ sportMap[e.sportName] }}</td>
+      <td>{{ e.homeTeamName }}</td>
+      <td>{{ e.awayTeamName }}</td>
+      <td>{{ e.venueName }}</td>
+      <td>{{ e.venueCity }}</td>
+      <td><a href="#">link</a></td>
+    </tr>
+  </tbody>
+
+  </ul>
+  <p *ngIf="event.length === 0">Brak eventow</p>
+</main>

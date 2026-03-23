@@ -15,14 +15,19 @@ import { sportNameEnum } from '../../enum/sportNameEnum';
 })
 export class SingleEventComponent implements OnInit{
   event: eventDto[] = [];
+  eventId!: string;
 
   constructor(
     private eventService: EventService,
+    private route: ActivatedRoute,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.loadSingleEvent();
+    this.route.paramMap.subscribe((params) => {
+      this.eventId = params.get('id')!;
+      this.loadSingleEvent();
+    });
   }
 
   sportMap: Record<number, string> = {
@@ -31,7 +36,7 @@ export class SingleEventComponent implements OnInit{
   };
 
   loadSingleEvent() {
-    this.eventService.getEvents().subscribe({
+    this.eventService.getSingleEvent(this.eventId).subscribe({
       next: (data) => {
         this.event = data;
       },
@@ -39,5 +44,9 @@ export class SingleEventComponent implements OnInit{
         console.error(err);
       },
     });
+  }
+
+  showEventsView() {
+    this.router.navigate(['/']);
   }
 }
