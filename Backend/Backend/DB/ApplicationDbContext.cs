@@ -42,15 +42,15 @@ public class ApplicationDbContext : DbContext
 
         //hardcoded data
         modelBuilder.Entity<Sport>().HasData(
-            new Sport { Id = 1, SportName = "Football" },
-            new Sport { Id = 2, SportName = "Ice Hockey" }
+            new Sport { Id = 1, SportName = SportName.Football },
+            new Sport { Id = 2, SportName = SportName.Ice_Hockey }
         );
 
         modelBuilder.Entity<Team>().HasData(
-            new Team { Id = 1, NameOfTeam = "Salzburg" },
-            new Team { Id = 2, NameOfTeam = "Sturm" },
-            new Team { Id = 3, NameOfTeam = "KAC" },
-            new Team { Id = 4, NameOfTeam = "Capitals" }
+            new Team { Id = 1, NameOfTeam = "Salzburg", TeamInformation="aaa" },
+            new Team { Id = 2, NameOfTeam = "Sturm" , TeamInformation = "aaa" },
+            new Team { Id = 3, NameOfTeam = "KAC", TeamInformation = "aaa" },
+            new Team { Id = 4, NameOfTeam = "Capitals", TeamInformation = "aaa" }
         );
 
         modelBuilder.Entity<Venue>().HasData(
@@ -62,7 +62,7 @@ public class ApplicationDbContext : DbContext
             new Event
             {
                 Id = 1,
-                DateTime = new DateTime(2019, 7, 18, 18, 30, 0),
+                DateTime = new DateTime(2019, 7, 18, 18, 30, 0, DateTimeKind.Utc),
                 Description = "Salzburg vs Sturm",
                 _SportId = 1,
                 _HomeTeamId = 1,
@@ -72,7 +72,7 @@ public class ApplicationDbContext : DbContext
             new Event
             {
                 Id = 2,
-                DateTime = new DateTime(2019, 10, 23, 9, 45, 0),
+                DateTime = new DateTime(2019, 10, 23, 9, 45, 0, DateTimeKind.Utc),
                 Description = "KAC vs Capitals",
                 _SportId = 2,
                 _HomeTeamId = 3,

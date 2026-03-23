@@ -21,7 +21,7 @@ public class EventController : ControllerBase
     }
 
     [HttpGet("show-events")]
-    public async Task<ActionResult<getEvents>> ShowEvents()
+    public async Task<ActionResult<getEventsDto>> ShowEvents()
     {
         var ev = await _context.Events
            .Include(e => e.Sport)
@@ -33,7 +33,7 @@ public class EventController : ControllerBase
         if (ev == null)
             return NotFound();
 
-        var eventsDto = ev.Select(ev => new getEvents
+        var eventsDto = ev.Select(ev => new getEventsDto
         {
             id = ev.Id,
             dateTime = ev.DateTime,
@@ -49,7 +49,7 @@ public class EventController : ControllerBase
     }
 
     [HttpGet("show-selected-event/{eventId}")]
-    public async Task<ActionResult<getSelectedEvent>>ShowSelectedEvent(int eventId)
+    public async Task<ActionResult<getSelectedEventDto>>ShowSelectedEvent(int eventId)
     {
         var ev = await _context.Events
             .Include(e => e.Sport)
@@ -61,7 +61,7 @@ public class EventController : ControllerBase
         if (ev == null)
             return NotFound();
 
-        var dto = new getSelectedEvent
+        var dto = new getSelectedEventDto
         {
             id = ev.Id,
             dateTime = ev.DateTime,
@@ -77,8 +77,19 @@ public class EventController : ControllerBase
     }
 
     [HttpPost("create-new-event")]
-    public async Task<IActionResult> CreateNewEvent([FromBody] postCreateEvent dto)
+    public async Task<IActionResult> CreateNewEvent([FromBody] postCreateEventDto dto)
     {
+         var newevent = new Event
+         {
+             DateTime=dto.dateTime,
+             Description= dto.description,
+
+
+         };
+
+        _context.Events.Add(newevent);
+
+        await _context.SaveChangesAsync();
 
         return Ok();
     }

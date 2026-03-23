@@ -18,7 +18,7 @@ export class EventService {
     return this.http.get<eventDto[]>(`${this.apiUrl}/show-selected-event${eventId}`, {});
   }
 
-  createEvent(email: string) {
-    return this.http.post(`${this.apiUrl}/create-new-event`, { email });
+  createEvent(dto: eventDto) {
+    return this.http.post(`${this.apiUrl}/create-new-event`, { dto });
   }
 }
