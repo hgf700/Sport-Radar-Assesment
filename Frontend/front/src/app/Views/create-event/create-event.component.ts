@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../../Services/EventService';
 import { eventDto } from '../../Dto/eventDto';
+import { sportNameEnum } from '../../enum/sportNameEnum';
 
 @Component({
   selector: 'app-create-event',
@@ -32,13 +33,18 @@ export class CreateEventComponent {
     this.createEventForm = this.fb.group({
       dateTime: [''],
       description: [''],
-      sportName: [''],
+      sportName: [sportNameEnum.Football],
       homeTeamName: [''],
       awayTeamName: [''],
       venueName: [''],
       venueCity: ['']
     });
   }
+
+  sportOptions = [
+    { value: sportNameEnum.Football, label: 'Football' },
+    { value: sportNameEnum.Ice_Hockey, label: 'Ice Hockey' }
+  ];
 
   showEventsView() {
     this.router.navigate(['/']);

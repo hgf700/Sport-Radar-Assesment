@@ -5,7 +5,12 @@
 
     <input formControlName="dateTime" type="datetime-local" /><br>
     <input formControlName="description" placeholder="Description" /><br>
-    <input formControlName="sportName" placeholder="Sport" /><br>
+    <select formControlName="sportName">
+      <option value="">-- wybierz sport --</option>
+      <option *ngFor="let sport of sportOptions" [value]="sport.value">
+        {{ sport.label }}
+      </option>
+    </select>
 
     <input formControlName="homeTeamName" placeholder="Home team" /><br>
     <input formControlName="awayTeamName" placeholder="Away team" /><br>

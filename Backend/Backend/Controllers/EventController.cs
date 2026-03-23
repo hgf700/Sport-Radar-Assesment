@@ -79,19 +79,71 @@ public class EventController : ControllerBase
     [HttpPost("create-new-event")]
     public async Task<IActionResult> CreateNewEvent([FromBody] postCreateEventDto dto)
     {
-         var newevent = new Event
-         {
-             DateTime=dto.dateTime,
-             Description= dto.description,
+        var homeTeam = await _context.Teams
+            .FirstOrDefaultAsync(t => t.NameOfTeam == dto.homeTeamName);
 
+        if (homeTeam == null)
+        {
+            homeTeam = new Team
+            {
+                NameOfTeam = dto.homeTeamName,
+                TeamInformation = "null",
+            };
 
-         };
+            _context.Teams.Add(homeTeam);
+            await _context.SaveChangesAsync();
+        }
 
-        _context.Events.Add(newevent);
+        var awayTeam = await _context.Teams
+            .FirstOrDefaultAsync(t => t.NameOfTeam == dto.awayTeamName);
 
+        if (awayTeam == null)
+        {
+            awayTeam = new Team
+            {
+                NameOfTeam = dto.awayTeamName,
+                TeamInformation = "null",
+            };
+
+            _context.Teams.Add(awayTeam);
+            await _context.SaveChangesAsync();
+        }
+
+        var sport = await _context.Sports
+            .FirstOrDefaultAsync(s => s.SportName == dto.sportName);
+
+        if (sport == null)
+            return BadRequest("Sport not found");
+
+        // --- VENUE ---
+        var venue = await _context.Venues
+            .FirstOrDefaultAsync(v => v.Name == dto.venueName && v.City == dto.venueCity);
+
+        if (venue == null)
+        {
+            venue = new Venue
+            {
+                Name = dto.venueName,
+                City = dto.venueCity
+            };
+
+            _context.Venues.Add(venue);
+            await _context.SaveChangesAsync();
+        }
+
+        var newEvent = new Event
+        {
+            DateTime = DateTime.SpecifyKind(dto.dateTime, DateTimeKind.Utc),
+            Description = dto.description,
+            _SportId = sport.Id,
+            _HomeTeamId = homeTeam.Id,
+            _AwayTeamId = awayTeam.Id,
+            _VenueId = venue.Id
+        };
+
+        _context.Events.Add(newEvent);
         await _context.SaveChangesAsync();
 
         return Ok();
     }
-    
 }
