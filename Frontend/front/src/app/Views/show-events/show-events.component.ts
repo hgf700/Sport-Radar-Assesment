@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { eventDto } from '../../Dto/eventDto';
+import { sportNameEnum } from '../../enum/sportNameEnum';
 
 @Component({
   selector: 'app-show-events',
@@ -24,6 +25,11 @@ export class ShowEventsComponent implements OnInit{
   ngOnInit(): void {
     this.loadEvents();
   }
+
+  sportMap: Record<number, string> = {
+    [sportNameEnum.Football]: 'piłka nożna',
+    [sportNameEnum.Ice_Hockey]: 'hokej na lodzie'
+  };
 
   loadEvents() {
     this.eventService.getEvents().subscribe({

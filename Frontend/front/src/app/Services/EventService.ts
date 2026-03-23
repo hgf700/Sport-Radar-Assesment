@@ -19,6 +19,6 @@ export class EventService {
   }
 
   createEvent(dto: eventDto) {
-    return this.http.post(`${this.apiUrl}/create-new-event`, { dto });
+    return this.http.post(`${this.apiUrl}/create-new-event`,  dto);
   }
 }

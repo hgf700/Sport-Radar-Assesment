@@ -87,7 +87,7 @@ public class EventController : ControllerBase
             homeTeam = new Team
             {
                 NameOfTeam = dto.homeTeamName,
-                TeamInformation = "null",
+                TeamInformation = null,
             };
 
             _context.Teams.Add(homeTeam);
@@ -102,7 +102,7 @@ public class EventController : ControllerBase
             awayTeam = new Team
             {
                 NameOfTeam = dto.awayTeamName,
-                TeamInformation = "null",
+                TeamInformation = null,
             };
 
             _context.Teams.Add(awayTeam);
