@@ -38,23 +38,14 @@ The frontend was built using Angular and includes:
     - form for creating a new event
     - after submission, redirects to the events view
 
-## 🔄 Application Flow
-
-1. User opens the application and views the list of events  
-2. User can navigate to the "Create Event" page  
-3. After submitting the form:
-   - data is sent to the backend  
-   - new event is saved in the database  
-   - user is redirected back to the events list  
-
 ### ▶️ How to Run
 
 **Backend**
-    ```bash
-    cd Backend
-    dotnet run
+  ```bash
+  cd Backend/Backend
+  dotnet run
 
 **Frontend**
-    ```bash
-    cd Frontend/front
-    npm start
+  ```bash
+  cd Frontend/front
+  npm start
