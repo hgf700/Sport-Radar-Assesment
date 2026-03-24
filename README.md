@@ -54,10 +54,6 @@ The frontend was built using Angular and includes:
 
 ### ▶️ How to Run
 
-## Requirments
-10.0 net sdk
-i wymagania angular
-
 ## Backend and Frontend
 ```bash 
 cd Backend/Backend
