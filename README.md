@@ -38,14 +38,30 @@ The frontend was built using Angular and includes:
     - form for creating a new event
     - after submission, redirects to the events view
 
+## ⚙️ Requirements
+
+### Backend
+- .NET SDK 10.0  
+  [Download .NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+
+### Frontend
+- Node.js 18+  
+  [Download Node.js](https://nodejs.org/)  
+- npm 9+  
+- Angular CLI 16+  
+  ```bash
+  npm install -g @angular/cli@16
+
 ### ▶️ How to Run
 
-**Backend**
-  ```bash
-  cd Backend/Backend
-  dotnet run
+## Requirments
+10.0 net sdk
+i wymagania angular
 
-**Frontend**
-  ```bash
-  cd Frontend/front
-  npm start
+## Backend and Frontend
+```bash 
+cd Backend/Backend
+dotnet run
+
+cd Frontend/front
+npm start
