@@ -64,7 +64,7 @@ The frontend was built using Angular and includes:
 ```bash 
 dotnet ef migrations add InitialCreate
 dotnet ef database update
-
+```
 ## Backend and Frontend
 ```bash 
 cd Backend/Backend
@@ -72,3 +72,4 @@ dotnet run
 
 cd Frontend/front
 npm start
+```
