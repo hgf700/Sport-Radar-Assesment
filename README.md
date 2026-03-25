@@ -31,12 +31,15 @@ The frontend was built using Angular and includes:
 - DTO interfaces for handling data from the backend
 - Services for managing API endpoints and HTTP communication
 - Routing between pages
-- Two main views:
+- Three main views:
   - **Show Events**
-    - displays all events or a selected event
+    - Displays a list of all events retrieved from the database
+    - Allows the user to enter an event ID in a form to navigate to the single event view
   - **Create Event**
-    - form for creating a new event
-    - after submission, redirects to the events view
+    - Provides a form for creating a new event
+    - After submission, redirects to the events view
+  - **Single Event**
+    - Displays detailed information about a selected event
 
 ## ⚙️ Requirements
 
