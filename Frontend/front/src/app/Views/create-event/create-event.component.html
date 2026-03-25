@@ -2,23 +2,21 @@
 
 <div>
   <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
-
-    <input formControlName="dateTime" type="datetime-local" /><br>
-    <input formControlName="description" placeholder="Description" /><br>
+    <input formControlName="dateTime" type="datetime-local" /><br />
+    <input formControlName="description" placeholder="Description" /><br />
     <select formControlName="sportName">
       <option value="">-- wybierz sport --</option>
       <option *ngFor="let sport of sportOptions" [value]="sport.value">
         {{ sport.label }}
-      </option>
-    </select><br>
+      </option></select
+    ><br />
 
-    <input formControlName="homeTeamName" placeholder="Home team" /><br>
-    <input formControlName="awayTeamName" placeholder="Away team" /><br>
+    <input formControlName="homeTeamName" placeholder="Home team" /><br />
+    <input formControlName="awayTeamName" placeholder="Away team" /><br />
 
-    <input formControlName="venueName" placeholder="Venue" /><br>
-    <input formControlName="venueCity" placeholder="City" /><br>
+    <input formControlName="venueName" placeholder="Venue" /><br />
+    <input formControlName="venueCity" placeholder="City" /><br />
 
     <button type="submit">Add</button>
-
   </form>
 </div>

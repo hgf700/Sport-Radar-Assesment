@@ -5,9 +5,9 @@ import { CreateEventComponent } from '../Views/create-event/create-event.compone
 import { SingleEventComponent } from '../Views/single-event/single-event.component';
 
 export const routes: Routes = [
-    { path: '', component: ShowEventsComponent },
-    { path: 'create-event', component: CreateEventComponent },
-    { path: 'single-event/:id', component: SingleEventComponent },
+  { path: '', component: ShowEventsComponent },
+  { path: 'create-event', component: CreateEventComponent },
+  { path: 'single-event/:id', component: SingleEventComponent },
 ];
 
 @NgModule({

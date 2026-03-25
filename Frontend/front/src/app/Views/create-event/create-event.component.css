@@ -17,7 +17,8 @@ form {
 }
 
 /* inputy i select */
-input, select {
+input,
+select {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -26,16 +27,17 @@ input, select {
 }
 
 /* focus efekt */
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #4caf50;
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 /* button */
 button {
   margin-top: 10px;
-  background: linear-gradient(135deg, #4CAF50, #2e7d32);
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
   color: white;
   border: none;
   padding: 10px;

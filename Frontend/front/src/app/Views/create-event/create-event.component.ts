@@ -17,9 +17,8 @@ import { sportNameEnum } from '../../enum/sportNameEnum';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './create-event.component.html',
-  styleUrl: './create-event.component.css'
+  styleUrl: './create-event.component.css',
 })
-
 export class CreateEventComponent {
   event: eventDto[] = [];
   createEventForm!: FormGroup;
@@ -37,13 +36,13 @@ export class CreateEventComponent {
       homeTeamName: [''],
       awayTeamName: [''],
       venueName: [''],
-      venueCity: ['']
+      venueCity: [''],
     });
   }
 
   sportOptions = [
     { value: sportNameEnum.Football, label: 'Football' },
-    { value: sportNameEnum.Ice_Hockey, label: 'Ice Hockey' }
+    { value: sportNameEnum.Ice_Hockey, label: 'Ice Hockey' },
   ];
 
   showEventsView() {
@@ -62,5 +61,4 @@ export class CreateEventComponent {
       error: (err) => alert(err.error),
     });
   }
-
 }

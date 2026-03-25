@@ -8,9 +8,8 @@ describe('SingleEventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SingleEventComponent]
-    })
-    .compileComponents();
+      imports: [SingleEventComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SingleEventComponent);
     component = fixture.componentInstance;

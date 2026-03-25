@@ -18,7 +18,7 @@
     <tbody>
       <tr>
         <td>{{ event.id }}</td>
-        <td>{{ event.dateTime | date:'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{ event.dateTime | date: "yyyy-MM-dd HH:mm" }}</td>
         <td>{{ event.description }}</td>
         <td>{{ sportMap[event.sportName] }}</td>
         <td>{{ event.homeTeamName }}</td>

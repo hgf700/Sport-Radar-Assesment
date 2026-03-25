@@ -9,12 +9,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-show-events',
-  imports: [CommonModule, ReactiveFormsModule,  RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   standalone: true,
   templateUrl: './show-events.component.html',
-  styleUrl: './show-events.component.css'
+  styleUrl: './show-events.component.css',
 })
-export class ShowEventsComponent implements OnInit{
+export class ShowEventsComponent implements OnInit {
   event: eventDto[] = [];
   selectSingleEventForm!: FormGroup;
   submitted = false;
@@ -35,7 +35,7 @@ export class ShowEventsComponent implements OnInit{
 
   sportMap: Record<number, string> = {
     [sportNameEnum.Football]: 'piłka nożna',
-    [sportNameEnum.Ice_Hockey]: 'hokej na lodzie'
+    [sportNameEnum.Ice_Hockey]: 'hokej na lodzie',
   };
 
   loadEvents() {

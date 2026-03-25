@@ -15,10 +15,12 @@ export class EventService {
   }
 
   getSingleEvent(eventId: number) {
-    return this.http.get<eventDto>(`${this.apiUrl}/show-selected-event/${eventId}`);
+    return this.http.get<eventDto>(
+      `${this.apiUrl}/show-selected-event/${eventId}`,
+    );
   }
 
   createEvent(dto: eventDto) {
-    return this.http.post(`${this.apiUrl}/create-new-event`,  dto);
+    return this.http.post(`${this.apiUrl}/create-new-event`, dto);
   }
 }

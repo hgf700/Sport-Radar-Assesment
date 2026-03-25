@@ -1,4 +1,4 @@
-import { sportNameEnum } from "../enum/sportNameEnum";
+import { sportNameEnum } from '../enum/sportNameEnum';
 
 export interface eventDto {
   id?: number;

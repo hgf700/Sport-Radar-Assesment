@@ -11,9 +11,9 @@ import { sportNameEnum } from '../../enum/sportNameEnum';
   imports: [CommonModule, RouterModule],
   standalone: true,
   templateUrl: './single-event.component.html',
-  styleUrl: './single-event.component.css'
+  styleUrl: './single-event.component.css',
 })
-export class SingleEventComponent implements OnInit{
+export class SingleEventComponent implements OnInit {
   event!: eventDto;
   eventId!: string;
 
@@ -30,7 +30,7 @@ export class SingleEventComponent implements OnInit{
 
   sportMap: Record<number, string> = {
     [sportNameEnum.Football]: 'piłka nożna',
-    [sportNameEnum.Ice_Hockey]: 'hokej na lodzie'
+    [sportNameEnum.Ice_Hockey]: 'hokej na lodzie',
   };
 
   loadSingleEvent(id: number) {
