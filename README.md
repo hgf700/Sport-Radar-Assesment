@@ -57,6 +57,14 @@ The frontend was built using Angular and includes:
 
 ### ▶️ How to Run
 
+## Environment Setup
+- Create a new .env file based on .env.example
+- Fill in the required values to enable database migrations and data retrieval
+- Run the following commands to apply database migrations:
+```bash 
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
 ## Backend and Frontend
 ```bash 
 cd Backend/Backend
