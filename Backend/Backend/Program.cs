@@ -1,6 +1,7 @@
 using Backend.DB;
-using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,12 +31,26 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAngular",
         policy => policy
             .WithOrigins("http://localhost:4200")
+            //do usuniecia
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials()
     );
 });
 
+//rate limit withou login
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+            factory: partition => new FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 20,
+                QueueLimit = 0,
+                Window = TimeSpan.FromMinutes(1)
+            }));
+});
 
 var app = builder.Build();
 
@@ -43,6 +58,10 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseRouting();
+
+app.UseRateLimiter();
 
 app.UseHttpsRedirection();
 

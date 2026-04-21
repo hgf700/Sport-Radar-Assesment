@@ -79,6 +79,12 @@ public class EventController : ControllerBase
     [HttpPost("create-new-event")]
     public async Task<IActionResult> CreateNewEvent([FromBody] postCreateEventDto dto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        if (dto.homeTeamName == dto.awayTeamName)
+            return BadRequest("Teams cannot be the same");
+
         var homeTeam = await _context.Teams
             .FirstOrDefaultAsync(t => t.NameOfTeam == dto.homeTeamName);
 
@@ -115,7 +121,6 @@ public class EventController : ControllerBase
         if (sport == null)
             return BadRequest("Sport not found");
 
-        // --- VENUE ---
         var venue = await _context.Venues
             .FirstOrDefaultAsync(v => v.Name == dto.venueName && v.City == dto.venueCity);
 
