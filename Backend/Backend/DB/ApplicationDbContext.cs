@@ -47,15 +47,15 @@ public class ApplicationDbContext : DbContext
         );
 
         modelBuilder.Entity<Team>().HasData(
-            new Team { Id = 1, NameOfTeam = "Salzburg", TeamInformation="aaa" },
-            new Team { Id = 2, NameOfTeam = "Sturm" , TeamInformation = "aaa" },
-            new Team { Id = 3, NameOfTeam = "KAC", TeamInformation = "aaa" },
-            new Team { Id = 4, NameOfTeam = "Capitals", TeamInformation = "aaa" }
+            new Team { Id = 1, NameOfTeam = "salzburg", TeamInformation="aaa" },
+            new Team { Id = 2, NameOfTeam = "sturm" , TeamInformation = "aaa" },
+            new Team { Id = 3, NameOfTeam = "kac", TeamInformation = "aaa" },
+            new Team { Id = 4, NameOfTeam = "capitals", TeamInformation = "aaa" }
         );
 
         modelBuilder.Entity<Venue>().HasData(
-           new Venue { Id = 1, Name = "Stadium A", City = "Salzburg" },
-           new Venue { Id = 2, Name = "Arena B", City = "Vienna" }
+           new Venue { Id = 1, Name = "stadium a", City = "salzburg" },
+           new Venue { Id = 2, Name = "arena b", City = "vienna" }
        );
 
         modelBuilder.Entity<Event>().HasData(
@@ -63,7 +63,7 @@ public class ApplicationDbContext : DbContext
             {
                 Id = 1,
                 DateTime = new DateTime(2019, 7, 18, 18, 30, 0, DateTimeKind.Utc),
-                Description = "Salzburg vs Sturm",
+                Description = "salzburg vs sturm",
                 _SportId = 1,
                 _HomeTeamId = 1,
                 _AwayTeamId = 2,
@@ -73,7 +73,7 @@ public class ApplicationDbContext : DbContext
             {
                 Id = 2,
                 DateTime = new DateTime(2019, 10, 23, 9, 45, 0, DateTimeKind.Utc),
-                Description = "KAC vs Capitals",
+                Description = "kac vs capitals",
                 _SportId = 2,
                 _HomeTeamId = 3,
                 _AwayTeamId = 4,

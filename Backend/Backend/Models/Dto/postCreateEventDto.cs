@@ -8,6 +8,7 @@ public class postCreateEventDto
     public DateTime dateTime { get; set; }
 
     [MaxLength(300)]
+    [MinLength(1)]
     public string? description { get; set; }
 
     [Required]
@@ -15,17 +16,21 @@ public class postCreateEventDto
 
     [Required]
     [MaxLength(100)]
+    [MinLength(1)]
     public string homeTeamName { get; set; }
 
     [Required]
     [MaxLength(100)]
+    [MinLength(1)]
     public string awayTeamName { get; set; }
 
     [Required]
     [MaxLength(100)]
+    [MinLength(1)]
     public string venueName { get; set; }
 
     [Required]
     [MaxLength(100)]
+    [MinLength(1)]
     public string venueCity { get; set; }
 }

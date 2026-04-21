@@ -1,5 +1,6 @@
 using Backend.DB;
 using DotNetEnv;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.RateLimiting;
 
@@ -31,25 +32,29 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAngular",
         policy => policy
             .WithOrigins("http://localhost:4200")
-            //do usuniecia
             .AllowAnyMethod()
             .AllowAnyHeader()
     );
 });
 
-//rate limit withou login
+//rate limit 
 builder.Services.AddRateLimiter(options =>
 {
-    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
-        RateLimitPartition.GetFixedWindowLimiter(
-            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
-            factory: partition => new FixedWindowRateLimiterOptions
-            {
-                AutoReplenishment = true,
-                PermitLimit = 20,
-                QueueLimit = 0,
-                Window = TimeSpan.FromMinutes(1)
-            }));
+    options.AddFixedWindowLimiter("RateLimitGet", opt =>
+    {
+        opt.PermitLimit = 30;
+        opt.Window = TimeSpan.FromSeconds(2);
+        opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        opt.QueueLimit = 10;
+    });
+
+    options.AddFixedWindowLimiter("RateLimitPost", opt =>
+    {
+        opt.PermitLimit = 3;
+        opt.Window = TimeSpan.FromSeconds(10);
+        opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        opt.QueueLimit = 2;
+    });
 });
 
 var app = builder.Build();
