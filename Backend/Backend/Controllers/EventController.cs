@@ -15,17 +15,21 @@ namespace Backend.Controllers;
 public class EventController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-    private readonly IFilter _pipe;
+    private readonly RetryService _retry;
 
-    public EventController(ApplicationDbContext context
+    public EventController(ApplicationDbContext context,
+        RetryService retry
         )
     {
         _context= context;
-
+        _retry = retry;
     }
-
-    [EnableRateLimiting("RateLimitGet")]
+    
     [HttpGet("show-events")]
+    [EnableRateLimiting("RateLimitGet")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<getEventsDto>> ShowEvents()
     {
         var ev = await _context.Events
@@ -53,8 +57,12 @@ public class EventController : ControllerBase
         return Ok(eventsDto);
     }
 
-    [EnableRateLimiting("RateLimitGet")]
     [HttpGet("show-selected-event/{eventId}")]
+    [EnableRateLimiting("RateLimitGet")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<getSelectedEventDto>>ShowSelectedEvent(int eventId)
     {
         var ev = await _context.Events
@@ -66,6 +74,7 @@ public class EventController : ControllerBase
 
         if (ev == null)
             return NotFound();
+
 
         var dto = new getSelectedEventDto
         {
@@ -91,10 +100,12 @@ public class EventController : ControllerBase
             .Execute(new StringContext { Value = value })
             .Value!;
     }
-
-    [EnableRateLimiting("RateLimitPost")]
+    
     [HttpPost("create-new-event")]
-    public async Task<IActionResult> CreateNewEvent([FromBody] postCreateEventDto dto)
+    [EnableRateLimiting("RateLimitPost")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> CreateNewEvent([FromBody] postCreateEventDto dto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -114,7 +125,6 @@ public class EventController : ControllerBase
         {
             var homeTeam = await _context.Teams
                 .FirstOrDefaultAsync(t => t.NameOfTeam == dto.homeTeamName);
-
 
             if (homeTeam == null)
             {
@@ -145,7 +155,10 @@ public class EventController : ControllerBase
                 .FirstOrDefaultAsync(s => s.SportName == dto.sportName);
 
             if (sport == null)
+            {
+                await transaction.RollbackAsync();
                 return BadRequest("Sport not found");
+            }
 
             var venue = await _context.Venues
                 .FirstOrDefaultAsync(v => v.Name == dto.venueName && v.City == dto.venueCity);
@@ -181,7 +194,7 @@ public class EventController : ControllerBase
         catch (Exception ex)
         {
             await transaction.RollbackAsync();
-            throw;
+            return StatusCode(500, "Internal server error");
         }
     }
 }
