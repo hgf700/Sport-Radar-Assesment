@@ -1,0 +1,4 @@
+//      walidacja modeli dto
+walidacja dla get tylko jesli przyjmuje parametry np. przez query i co najwyzje walidacja dla paginacji
+a tak poza tym to walidacja post
+

@@ -1,4 +1,6 @@
-﻿namespace Backend.Models.Dto;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Backend.Models.Dto;
 
 public class getSelectedEventDto
 {
