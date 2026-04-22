@@ -19,6 +19,9 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Event>()
+            .HasCheckConstraint("CK_Event_Teams", "[_HomeTeamId] <> [_AwayTeamId]");
+
+        modelBuilder.Entity<Event>()
             .HasOne(e => e.HomeTeam)
             .WithMany()
             .HasForeignKey(e => e._HomeTeamId)
@@ -33,12 +36,14 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Event>()
             .HasOne(e => e.Sport)
             .WithMany()
-            .HasForeignKey(e => e._SportId);
+            .HasForeignKey(e => e._SportId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Event>()
             .HasOne(e => e.Venue)
             .WithMany()
-            .HasForeignKey(e => e._VenueId);
+            .HasForeignKey(e => e._VenueId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         //hardcoded data
         modelBuilder.Entity<Sport>().HasData(

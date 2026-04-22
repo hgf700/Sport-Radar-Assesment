@@ -29,7 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //cors
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular",
+    options.AddPolicy("Prod",
         policy => policy
             .WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
@@ -66,6 +66,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
+//rate limit
 app.UseRateLimiter();
 
 app.UseHttpsRedirection();
@@ -73,7 +74,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 //usage cors
-app.UseCors("AllowAngular");
+app.UseCors("Prod");
 
 app.MapControllers();
 

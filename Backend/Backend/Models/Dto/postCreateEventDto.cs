@@ -8,7 +8,6 @@ public class postCreateEventDto
     public DateTime dateTime { get; set; }
 
     [MaxLength(300)]
-    [MinLength(1)]
     public string? description { get; set; }
 
     [Required]
