@@ -7,7 +7,7 @@ namespace Backend.Models;
 [Index(nameof(_VenueId))]
 [Index(nameof(_HomeTeamId))]
 [Index(nameof(_AwayTeamId))]
-public class Event
+public class Event : IBaseModel
 {
     [Key]
     public int Id { get; set; }

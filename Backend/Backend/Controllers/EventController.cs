@@ -65,6 +65,9 @@ public class EventController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<getSelectedEventDto>>ShowSelectedEvent(int eventId)
     {
+        if (eventId < 1) 
+            return BadRequest();
+
         var ev = await _context.Events
             .Include(e => e.Sport)
             .Include(e => e.HomeTeam)
@@ -105,6 +108,7 @@ public class EventController : ControllerBase
     [EnableRateLimiting("RateLimitPost")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> CreateNewEvent([FromBody] postCreateEventDto dto)
     {
         if (!ModelState.IsValid)
@@ -194,7 +198,7 @@ public class EventController : ControllerBase
         catch (Exception ex)
         {
             await transaction.RollbackAsync();
-            return StatusCode(500, "Internal server error");
+            return BadRequest("Internal server error");
         }
     }
 }
