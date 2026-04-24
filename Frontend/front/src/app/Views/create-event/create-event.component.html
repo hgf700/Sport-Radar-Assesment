@@ -1,22 +1,112 @@
-<button (click)="showEventsView()">View with Events</button><br />
+<button (click)="showEventsView()" aria-label="Przełącz na widok wydarzeń">
+  View with Events
+</button>
 
-<div>
-  <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
-    <input formControlName="dateTime" type="datetime-local" /><br />
-    <input formControlName="description" placeholder="Description" /><br />
-    <select formControlName="sportName">
-      <option value="">-- wybierz sport --</option>
-      <option *ngFor="let sport of sportOptions" [value]="sport.value">
-        {{ sport.label }}
-      </option></select
-    ><br />
+<div class="form-container">
+  <form
+    [formGroup]="createEventForm"
+    (ngSubmit)="onSubmit()"
+    aria-labelledby="form-title"
+  >
+    <h2 id="form-title">Dodaj wydarzenie</h2>
 
-    <input formControlName="homeTeamName" placeholder="Home team" /><br />
-    <input formControlName="awayTeamName" placeholder="Away team" /><br />
+    <div class="form-group">
+      <label for="dateTime">Data i godzina</label>
+      <input
+        id="dateTime"
+        formControlName="dateTime"
+        type="datetime-local"
+        required
+      />
+    </div>
 
-    <input formControlName="venueName" placeholder="Venue" /><br />
-    <input formControlName="venueCity" placeholder="City" /><br />
+    <div class="form-group">
+      <label for="description">Opis</label>
+      <input
+        id="description"
+        formControlName="description"
+        placeholder="Opis wydarzenia"
+      />
+    </div>
 
-    <button type="submit">Add</button>
+    <div class="form-group">
+      <label for="sportName">Sport</label>
+      <select id="sportName" formControlName="sportName" required>
+        <option value="">-- wybierz sport --</option>
+        <option *ngFor="let sport of sportOptions" [value]="sport.value">
+          {{ sport.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="homeTeamName">Drużyna gospodarzy</label>
+      <input
+        id="homeTeamName"
+        formControlName="homeTeamName"
+        placeholder="Home team"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="awayTeamName">Drużyna gości</label>
+      <input
+        id="awayTeamName"
+        formControlName="awayTeamName"
+        placeholder="Away team"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="venueName">Miejsce</label>
+      <input
+        id="venueName"
+        formControlName="venueName"
+        placeholder="Venue"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="venueCity">Miasto</label>
+      <input
+        id="venueCity"
+        formControlName="venueCity"
+        placeholder="City"
+      />
+    </div>
+
+    <button type="submit">
+      Dodaj wydarzenie
+    </button>
+
+    <p *ngIf="isLoading">Ładowanie...</p>
+    <p *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </p>
   </form>
 </div>
+
+<div *ngIf="(submitted || f['dateTime'].touched) && f['dateTime'].invalid">
+  <small *ngIf="f['dateTime'].errors?.['required']">
+    Data jest wymagana
+  </small>
+</div>
+
+<div *ngIf="(submitted || f['sportName'].touched) && f['sportName'].invalid">
+  <small *ngIf="f['sportName'].errors?.['required']">
+    Wybierz sport
+  </small>
+</div>
+
+<div *ngIf="(submitted || f['homeTeamName'].touched) && f['homeTeamName'].invalid">
+  <small *ngIf="f['homeTeamName'].errors?.['required']">
+    Nazwa drużyny jest wymagana
+  </small>
+</div>
+
+<div *ngIf="(submitted || f['venueName'].touched) && f['venueName'].invalid">
+  <small *ngIf="f['venueName'].errors?.['required']">
+    Miejsce jest wymagane
+  </small>
+</div>
+

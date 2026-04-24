@@ -1,4 +1,5 @@
 using Backend.DB;
+using Backend.Patterns;
 using DotNetEnv;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,8 @@ builder.Services.AddRateLimiter(options =>
         opt.QueueLimit = 2;
     });
 });
+
+builder.Services.AddScoped<RetryService>();
 
 var app = builder.Build();
 

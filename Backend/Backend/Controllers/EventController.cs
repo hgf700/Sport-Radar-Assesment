@@ -139,6 +139,8 @@ public class EventController : ControllerBase
                 };
 
                 _context.Teams.Add(homeTeam);
+                await _context.SaveChangesAsync();
+
             }
 
             var awayTeam = await _context.Teams
@@ -153,6 +155,7 @@ public class EventController : ControllerBase
                 };
 
                 _context.Teams.Add(awayTeam);
+                await _context.SaveChangesAsync();
             }
 
             var sport = await _context.Sports
@@ -197,6 +200,7 @@ public class EventController : ControllerBase
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             await transaction.RollbackAsync();
             return BadRequest("Internal server error");
         }

@@ -18,8 +18,10 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Event>()
-            .HasCheckConstraint("CK_Event_Teams", "[_HomeTeamId] <> [_AwayTeamId]");
+        base.OnModelCreating(modelBuilder);
+
+        //modelBuilder.Entity<Event>()
+        //    .HasCheckConstraint("CK_Event_Teams", "[_HomeTeamId] <> [_AwayTeamId]");
 
         modelBuilder.Entity<Event>()
             .HasOne(e => e.HomeTeam)

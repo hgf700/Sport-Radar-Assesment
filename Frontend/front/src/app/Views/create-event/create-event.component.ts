@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../../Services/EventService';
@@ -24,19 +24,28 @@ export class CreateEventComponent {
   createEventForm!: FormGroup;
   submitted = false;
 
+  isLoading = false;
+  errorMessage: string | null = null;
+
   constructor(
     private eventService: EventService,
     private fb: FormBuilder,
-    private router: Router,
+    private router: Router
   ) {
     this.createEventForm = this.fb.group({
-      dateTime: [''],
+      dateTime: ['', 
+        [Validators.required]],
       description: [''],
-      sportName: [sportNameEnum.Football],
-      homeTeamName: [''],
-      awayTeamName: [''],
-      venueName: [''],
-      venueCity: [''],
+      sportName: [sportNameEnum.Football, 
+        [Validators.required]],
+      homeTeamName: ['', 
+        [Validators.required, Validators.minLength(1)]],
+      awayTeamName: ['',
+        [Validators.required, Validators.minLength(1)]],
+      venueName: ['', 
+        [Validators.required,Validators.minLength(1)]],
+      venueCity: ['', 
+        [Validators.required,Validators.minLength(1)]],
     });
   }
 
@@ -49,16 +58,29 @@ export class CreateEventComponent {
     this.router.navigate(['/']);
   }
 
+  // getter ułatwiający dostęp do pól w HTML
+  get f() {
+    return this.createEventForm.controls;
+  }
+
   onSubmit() {
     this.submitted = true;
+    this.errorMessage = null;
 
     if (this.createEventForm.invalid) return;
+    
+    this.isLoading = true;
 
     this.eventService.createEvent(this.createEventForm.value).subscribe({
       next: () => {
+        this.isLoading = false;
         this.router.navigate(['/']);
       },
-      error: (err) => alert(err.error),
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage =
+          err?.error || 'Wystąpił błąd podczas tworzenia wydarzenia';
+      },
     });
   }
 }
