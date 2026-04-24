@@ -1,9 +1,13 @@
 //      walidacja modeli 
 walidacja dla get dto tylko jesli przyjmuje parametry np. przez query i co najwyzje walidacja dla paginacji
-a tak poza tym to walidacja post dto
-i modeli w db na wyadek ominiecia dto
+a tak poza tym to walidacja post dto i modeli w db na wypadek ominiecia dto
 
 //      indexy w bd 
 trzeba je robic bo tylko mysql robi automatycznie indexy po fk (ale i tak powinienem je robic samemu a nie 
 polegac na automacie) po to index bo szybsze query
+
+//      aria
+dla nieslyszacych lub slabo urzadzenei przeczyta zmienna jak dam
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes
+aria samo czyta label, required w input, select dla list, 
 

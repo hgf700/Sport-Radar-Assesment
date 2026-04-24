@@ -1,4 +1,4 @@
-<button (click)="showEventsView()" aria-label="Przełącz na widok wydarzeń">
+<button (click)="showEventsView()" aria-label="switch to event view">
   View with Events
 </button>
 
@@ -6,33 +6,37 @@
   <form
     [formGroup]="createEventForm"
     (ngSubmit)="onSubmit()"
-    aria-labelledby="form-title"
-  >
-    <h2 id="form-title">Dodaj wydarzenie</h2>
+    aria-labelledby="form-title">
+    <h2 id="form-title">Add event</h2>
 
     <div class="form-group">
-      <label for="dateTime">Data i godzina</label>
+      <label for="dateTime">Date and hour</label>
       <input
         id="dateTime"
         formControlName="dateTime"
         type="datetime-local"
         required
+        aria-describedby="dateTime-error"
       />
     </div>
 
     <div class="form-group">
-      <label for="description">Opis</label>
+      <label for="description">Description</label>
       <input
         id="description"
         formControlName="description"
-        placeholder="Opis wydarzenia"
+        placeholder="Event description"
       />
     </div>
 
     <div class="form-group">
-      <label for="sportName">Sport</label>
-      <select id="sportName" formControlName="sportName" required>
-        <option value="">-- wybierz sport --</option>
+      <label for="sportName">Choose Sport</label>
+      <select id="sportName" 
+        formControlName="sportName" 
+        required 
+        aria-describedby="chooseSport-error"
+        >
+        <option value="">-- choose sport --</option>
         <option *ngFor="let sport of sportOptions" [value]="sport.value">
           {{ sport.label }}
         </option>
@@ -40,73 +44,102 @@
     </div>
 
     <div class="form-group">
-      <label for="homeTeamName">Drużyna gospodarzy</label>
+      <label for="homeTeamName">Home team</label>
       <input
         id="homeTeamName"
         formControlName="homeTeamName"
         placeholder="Home team"
+        aria-describedby="homeTeam-error"
       />
     </div>
 
     <div class="form-group">
-      <label for="awayTeamName">Drużyna gości</label>
+      <label for="awayTeamName">Away team</label>
       <input
         id="awayTeamName"
         formControlName="awayTeamName"
         placeholder="Away team"
+        aria-describedby="awayTeam-error"
       />
     </div>
 
     <div class="form-group">
-      <label for="venueName">Miejsce</label>
+      <label for="venueName">Venue</label>
       <input
         id="venueName"
         formControlName="venueName"
         placeholder="Venue"
+        aria-describedby="venue-error"
       />
     </div>
 
     <div class="form-group">
-      <label for="venueCity">Miasto</label>
+      <label for="venueCity">City</label>
       <input
         id="venueCity"
         formControlName="venueCity"
         placeholder="City"
+        aria-describedby="city-error"
       />
     </div>
 
     <button type="submit">
-      Dodaj wydarzenie
+      Add event
     </button>
 
-    <p *ngIf="isLoading">Ładowanie...</p>
+    <p *ngIf="isLoading">Loading...</p>
     <p *ngIf="errorMessage" class="error">
       {{ errorMessage }}
     </p>
   </form>
 </div>
 
-<div *ngIf="(submitted || f['dateTime'].touched) && f['dateTime'].invalid">
+<div 
+  id="dateTime-error" 
+  *ngIf="(submitted || f['dateTime'].touched) && f['dateTime'].invalid"
+  >
   <small *ngIf="f['dateTime'].errors?.['required']">
-    Data jest wymagana
+    Date is required in form
   </small>
 </div>
 
-<div *ngIf="(submitted || f['sportName'].touched) && f['sportName'].invalid">
+<div
+  id="chooseSport-error" 
+  *ngIf="(submitted || f['sportName'].touched) && f['sportName'].invalid">
   <small *ngIf="f['sportName'].errors?.['required']">
-    Wybierz sport
+    Choose sport in form
   </small>
 </div>
 
-<div *ngIf="(submitted || f['homeTeamName'].touched) && f['homeTeamName'].invalid">
+<div 
+  id="homeTeam-error" 
+  *ngIf="(submitted || f['homeTeamName'].touched) && f['homeTeamName'].invalid">
   <small *ngIf="f['homeTeamName'].errors?.['required']">
-    Nazwa drużyny jest wymagana
+    Home team name are required in form
   </small>
 </div>
 
-<div *ngIf="(submitted || f['venueName'].touched) && f['venueName'].invalid">
+<div 
+  id="awayTeam-error" 
+  *ngIf="(submitted || f['awayTeamName'].touched) && f['awayTeamName'].invalid">
+  <small *ngIf="f['awayTeamName'].errors?.['required']">
+    Away team name are required in form
+  </small>
+</div>
+
+<div  
+  id="venue-error" 
+  *ngIf="(submitted || f['venueName'].touched) && f['venueName'].invalid">
   <small *ngIf="f['venueName'].errors?.['required']">
-    Miejsce jest wymagane
+    Venue is required in form
+  </small>
+</div>
+
+<div  
+  id="city-error" 
+  *ngIf="(submitted || f['venueCity'].touched) && f['venueCity'].invalid">
+  <small *ngIf="f['venueCity'].errors?.['required']">
+    Venue is required in form
   </small>
 </div>
 

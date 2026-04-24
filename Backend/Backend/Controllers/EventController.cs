@@ -179,6 +179,7 @@ public class EventController : ControllerBase
                 };
 
                 _context.Venues.Add(venue);
+                await _context.SaveChangesAsync();
             }
 
             var newEvent = new Event
