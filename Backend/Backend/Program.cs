@@ -20,7 +20,6 @@ builder.Services.AddOpenApi();
 //var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
 //var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 
-//connecting db
 //var connectionString =
 //  $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
 
