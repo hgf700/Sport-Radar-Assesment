@@ -14,15 +14,21 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 //data from .env
-var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
-var db = Environment.GetEnvironmentVariable("POSTGRES_DB");
-var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
-var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+//var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+//var db = Environment.GetEnvironmentVariable("POSTGRES_DB");
+//var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
+//var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+//var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 
 //connecting db
-var connectionString =
-    $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
+//var connectionString =
+//  $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(connectionString));
+
+//for unit tests
+var connectionString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));

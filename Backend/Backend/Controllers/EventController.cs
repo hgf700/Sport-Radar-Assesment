@@ -39,6 +39,9 @@ public class EventController : ControllerBase
            .Include(e => e.Venue)
            .ToListAsync();
 
+        if (!ev.Any())
+            return NoContent();
+
         if (ev == null)
             return NotFound();
 
@@ -78,6 +81,8 @@ public class EventController : ControllerBase
         if (ev == null)
             return NotFound();
 
+        if (ev.Sport == null || ev.HomeTeam == null || ev.AwayTeam == null || ev.Venue == null)
+            return StatusCode(500, "Corrupted event data");
 
         var dto = new getSelectedEventDto
         {
@@ -197,7 +202,7 @@ public class EventController : ControllerBase
 
             await transaction.CommitAsync();
 
-            return Ok();
+            return Ok(newEvent);
         }
         catch (Exception ex)
         {

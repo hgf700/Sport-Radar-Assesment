@@ -1,20 +1,5 @@
 
 Testing strategy (potem testy)
-While test files are present, expanding your test coverage would further strengthen your solution. Focus 
+ expanding your test coverage would further strengthen your solution. Focus 
 especially on unit tests for the service layer, integration tests for API endpoints, and frontend component 
 testing.
-
-Frontend polish (potem front) X
-Your Angular implementation is functional, and it could be further enhanced with improved mobile responsiveness,
- stronger accessibility practices (ARIA labels, semantic HTML), and clearer loading and error states in the UI.
-
-Database optimization X
-Your database design covers the core requirements well. Opportunities for improvement include more consistent 
-foreign key naming, additional integrity constraints, and indexing strategies to support performance.
-
-Recommendations for next steps
-
-Strengthen validation, security, and backend testing foundations
-Expand test coverage across backend and frontend layers
-Improve frontend accessibility and responsiveness
-Refine database practices with constraints and indexing X
