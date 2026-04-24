@@ -1,17 +1,22 @@
-<button (click)="showEventsView()">View with Events</button><br />
+<button (click)="showEventsView()">
+  Back to events list
+</button>
 
-<main class="main" *ngIf="event">
-  <table>
+<main class="main">
+  <table *ngIf="event; else noEvent" aria-label="Event details">
+    <caption>Event details</caption>
+
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Opis</th>
-        <th>Sport</th>
-        <th>Home</th>
-        <th>Away</th>
-        <th>Venue</th>
-        <th>City</th>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Sport</th>
+        <th scope="col">Home</th>
+        <th scope="col">Away</th>
+        <th scope="col">Venue</th>
+        <th scope="col">City</th>
+        <th scope="col">Link</th>
       </tr>
     </thead>
 
@@ -25,9 +30,16 @@
         <td>{{ event.awayTeamName }}</td>
         <td>{{ event.venueName }}</td>
         <td>{{ event.venueCity }}</td>
+        <td>
+          <a href="#" aria-label="View details">
+            View
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>
-</main>
 
-<p *ngIf="!event">Brak eventu</p>
+  <ng-template #noEvent>
+    <p role="status">No event found</p>
+  </ng-template>
+</main>

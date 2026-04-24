@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: #0f172a;
+  /* color: #f1f5f9; */
+  color: grey;
+}
+
 button {
-  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  background: linear-gradient(135deg, rgba(0, 183, 255, 0.973), rgba(0, 89, 255, 0.973));
   color: white;
   border: none;
   padding: 10px 18px;
@@ -19,4 +25,66 @@ button:hover {
 button:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+button:focus,
+input:focus,
+select:focus,
+a:focus {
+  outline: 3px solid rgba(0, 183, 255, 0.973);
+  outline-offset: 2px;
+}
+
+a{
+  color: rgba(0, 183, 255, 0.973);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 🧾 Form */
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 0.5rem;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 1.1rem;
+  }
 }

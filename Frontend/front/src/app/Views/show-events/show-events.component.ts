@@ -34,8 +34,8 @@ export class ShowEventsComponent implements OnInit {
   }
 
   sportMap: Record<number, string> = {
-    [sportNameEnum.Football]: 'piłka nożna',
-    [sportNameEnum.Ice_Hockey]: 'hokej na lodzie',
+    [sportNameEnum.Football]: 'Football',
+    [sportNameEnum.Ice_Hockey]: 'Ice Hockey',
   };
 
   loadEvents() {

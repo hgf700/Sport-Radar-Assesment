@@ -1,25 +1,40 @@
-<button (click)="createEventView()">View to create events</button><br />
+<button (click)="createEventView()">
+  Go to create event view
+</button>
 
 <div>
-  <form [formGroup]="selectSingleEventForm" (ngSubmit)="onSubmit()">
-    <input formControlName="eventId" placeholder="insert Event Id" /><br />
-    <button type="submit">search single event</button>
+  <form
+    [formGroup]="selectSingleEventForm"
+    (ngSubmit)="onSubmit()"
+    aria-labelledby="search-form-title"
+  >
+    <h2 id="search-form-title">Search event by ID</h2>
+
+    <label for="eventId">Event ID</label>
+    <input
+      id="eventId"
+      formControlName="eventId"
+      placeholder="Insert Event ID"
+      required
+    />
+
+    <button type="submit">Search single event</button>
   </form>
 </div>
 
 <main class="main">
-  <ul *ngIf="event.length > 0">
+  <table *ngIf="event.length > 0" aria-label="Event list">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Opis</th>
-        <th>Sport</th>
-        <th>Home</th>
-        <th>Away</th>
-        <th>Venue</th>
-        <th>City</th>
-        <th>Link</th>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Sport</th>
+        <th scope="col">Home</th>
+        <th scope="col">Away</th>
+        <th scope="col">Venue</th>
+        <th scope="col">City</th>
+        <th scope="col">Link</th>
       </tr>
     </thead>
 
@@ -33,9 +48,16 @@
         <td>{{ e.awayTeamName }}</td>
         <td>{{ e.venueName }}</td>
         <td>{{ e.venueCity }}</td>
-        <td><a href="#">link</a></td>
+        <td>
+          <a href="#" aria-label="View details">
+            View
+          </a>
+        </td>
       </tr>
     </tbody>
-  </ul>
-  <p *ngIf="event.length === 0">Brak eventow</p>
+  </table>
+
+  <p *ngIf="event.length === 0" role="status">
+    No events found
+  </p>
 </main>

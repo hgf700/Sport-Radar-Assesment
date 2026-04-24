@@ -11,7 +11,7 @@ While test files are present, expanding your test coverage would further strengt
 especially on unit tests for the service layer, integration tests for API endpoints, and frontend component 
 testing.
 
-Frontend polish (potem front)
+Frontend polish (potem front) X
 Your Angular implementation is functional, and it could be further enhanced with improved mobile responsiveness,
  stronger accessibility practices (ARIA labels, semantic HTML), and clearer loading and error states in the UI.
 

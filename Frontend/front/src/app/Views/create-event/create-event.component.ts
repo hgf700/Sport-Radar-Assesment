@@ -33,6 +33,7 @@ export class CreateEventComponent {
     private router: Router
   ) {
     this.createEventForm = this.fb.group({
+      //[[]] po to by byla asynchronicznosc
       dateTime: ['', 
         [Validators.required]],
       description: [''],
