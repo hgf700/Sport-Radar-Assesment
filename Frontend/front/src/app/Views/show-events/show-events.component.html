@@ -61,3 +61,12 @@
     No events found
   </p>
 </main>
+
+<div 
+  id="eventId-error"
+  *ngIf="submitted && f['eventId'].invalid"
+>
+  <small *ngIf="f['eventId'].errors?.['required']">
+    Event ID is required
+  </small>
+</div>

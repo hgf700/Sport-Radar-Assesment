@@ -53,6 +53,10 @@ export class ShowEventsComponent implements OnInit {
     this.router.navigate(['/create-event']);
   }
 
+  get f() {
+    return this.selectSingleEventForm.controls;
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.selectSingleEventForm.invalid) return;

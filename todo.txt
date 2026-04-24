@@ -1,10 +1,3 @@
-Areas for growth and enhancement
-
-Security and validation X
-Your application would benefit from stronger input validation and security measures. In particular, 
-consider implementing server‑side validation for all API endpoints, configuring CORS for production environments,
- and sanitizing inputs to reduce potential security risks.
-
 
 Testing strategy (potem testy)
 While test files are present, expanding your test coverage would further strengthen your solution. Focus 
