@@ -96,7 +96,7 @@ public class EventController : ControllerBase
             venueCity = ev.Venue.City
         };
 
-        return dto;
+        return Ok(dto);
     }
 
     private string NormalizeEvent(string? value)
