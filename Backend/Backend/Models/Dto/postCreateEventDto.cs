@@ -11,8 +11,7 @@ public class postCreateEventDto
     [MaxLength(300)]
     public string? description { get; set; }
 
-    [Required]
-    public SportName sportName { get; set; }
+    public SportName? sportName { get; set; }
 
     [Required]
     [MaxLength(100)]

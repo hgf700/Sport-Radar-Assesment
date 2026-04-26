@@ -1,4 +1,4 @@
-using Backend.DB;
+﻿using Backend.DB;
 using Backend.Patterns;
 using DotNetEnv;
 using Microsoft.AspNetCore.RateLimiting;
@@ -10,27 +10,40 @@ var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
 
 builder.Services.AddControllers();
+//swagger
 builder.Services.AddOpenApi();
 
-// connection string
+//data from .env
+//var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+//var db = Environment.GetEnvironmentVariable("POSTGRES_DB");
+//var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
+//var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+//var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+
+//var connectionString =
+//  $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(connectionString));
+
+//for unit tests
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
-var env = builder.Environment;
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
-if (env.IsEnvironment("Testing"))
+if (app.Environment.IsDevelopment())
 {
-    // TESTS → InMemory DB
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("TestDb"));
+    builder.Services.AddDbContext<ApplicationDbContext>(o =>
+        o.UseInMemoryDatabase("TestDb"));
 }
 else
 {
-    // DEV / PROD → PostgreSQL
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseNpgsql(connectionString));
+    builder.Services.AddDbContext<ApplicationDbContext>(o =>
+        o.UseNpgsql(connectionString));
 }
 
-// CORS
+//cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Prod",
@@ -41,7 +54,7 @@ builder.Services.AddCors(options =>
     );
 });
 
-// RATE LIMITING
+//rate limit 
 builder.Services.AddRateLimiter(options =>
 {
     options.AddFixedWindowLimiter("RateLimitGet", opt =>
@@ -65,25 +78,23 @@ builder.Services.AddScoped<RetryService>();
 
 var app = builder.Build();
 
-// PIPELINE
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
 app.UseRouting();
 
+//rate limit
 app.UseRateLimiter();
+
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+//usage cors
 app.UseCors("Prod");
 
 app.MapControllers();
 
 app.Run();
-
-// potrzebne dla WebApplicationFactory dla test
-public partial class Program { }

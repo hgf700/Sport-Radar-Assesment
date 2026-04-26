@@ -40,9 +40,6 @@ public class EventController : ControllerBase
            .Include(e => e.Venue)
            .ToListAsync();
 
-        if (!ev.Any())
-            return NoContent();
-
         if (ev == null)
             return NotFound();
 
@@ -126,8 +123,6 @@ public class EventController : ControllerBase
         if (dto.homeTeamName == dto.awayTeamName)
             return BadRequest("Teams cannot be the same");
 
-        using var transaction = await _context.Database.BeginTransactionAsync();
-
         try
         {
             var homeTeam = await _context.Teams
@@ -166,7 +161,6 @@ public class EventController : ControllerBase
 
             if (sport == null)
             {
-                await transaction.RollbackAsync();
                 return BadRequest("Sport not found");
             }
 
@@ -198,14 +192,12 @@ public class EventController : ControllerBase
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
 
-            await transaction.CommitAsync();
 
             return Ok(newEvent);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            await transaction.RollbackAsync();
             return BadRequest("Internal server error");
         }
     }
