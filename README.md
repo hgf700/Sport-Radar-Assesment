@@ -12,17 +12,28 @@ The main focus of the project is the backend implementation.
 **Frontend:**
 - Angular
 
+## ⚙️Tools & Infrastructure:
+- Docker
+- GitHub Actions (CI/CD)
+
+## 🧪Unit Tests
+- Backend xUnit
+- Frontend Jasmine
+
 ## 🚀 Backend Implementation
 
 The backend was built using ASP.NET Core Web API and includes:
 
-- PostgreSQL database connection configured via `.env`
+- Dockerized version of the application with PostgreSQL connection configured via `.env`
 - CORS configuration to enable communication with the frontend
 - REST API controller for:
   - retrieving events
   - creating new events
-- Entity models used for database structure
+- Entity models used for database structure with data annotations and attributes
 - DTOs (Data Transfer Objects) used for communication between backend and frontend
+- Unit test covering common error cases, using an in-memory database with seeded data
+- Integration of unit tests with GitHub Actions for automated testing (CI)
+- Containerization using Docker
 
 ## 🎨 Frontend Implementation
 
@@ -30,7 +41,10 @@ The frontend was built using Angular and includes:
 
 - DTO interfaces for handling data from the backend
 - Services for managing API endpoints and HTTP communication
-- Routing between pages
+- Client-side routing between pages
+- User interface Unit test in Jasmine
+- Basic accessibility support (ARIA) for visually impaired users
+- Dark-blue UI theme
 - Three main views:
   - **Show Events**
     - Displays a list of all events retrieved from the database
@@ -58,7 +72,7 @@ The frontend was built using Angular and includes:
 ### ▶️ How to Run
 
 ## Environment Setup
-- Create a new .env file based on .env.example
+- Create a new .env file based on `.env.example` (only for docker)
 - Fill in the required values to enable database migrations and data retrieval
 - Run the following commands to apply database migrations:
 ```bash 
@@ -73,3 +87,5 @@ dotnet run
 cd Frontend/front
 npm start
 ```
+
+## Docker Setup

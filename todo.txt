@@ -1,5 +1,0 @@
-
-Testing strategy (potem testy)
- expanding your test coverage would further strengthen your solution. Focus 
-especially on unit tests for the service layer, integration tests for API endpoints, and frontend component 
-testing.

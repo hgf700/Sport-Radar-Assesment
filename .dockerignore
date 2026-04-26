@@ -1,0 +1,11 @@
+**/.vs/
+**/bin/
+**/obj/
+**/.env
+opinia/
+useful/
+
+**/TestResults/
+**/node_modules/
+**/dist/
+**/coverage/
