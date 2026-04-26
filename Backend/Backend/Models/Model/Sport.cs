@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models;
+namespace Backend.Models.Model;
 
 [Index(nameof(SportName), IsUnique = true)]
 public class Sport

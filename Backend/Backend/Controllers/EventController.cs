@@ -1,6 +1,7 @@
 ﻿using Backend.DB;
 using Backend.Models;
 using Backend.Models.Dto;
+using Backend.Models.Model;
 using Backend.Patterns;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -80,9 +81,6 @@ public class EventController : ControllerBase
 
         if (ev == null)
             return NotFound();
-
-        if (ev.Sport == null || ev.HomeTeam == null || ev.AwayTeam == null || ev.Venue == null)
-            return StatusCode(500, "Corrupted event data");
 
         var dto = new getSelectedEventDto
         {

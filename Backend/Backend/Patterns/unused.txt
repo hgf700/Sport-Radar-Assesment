@@ -1,0 +1,26 @@
+﻿//using Backend.Models.Model;
+
+//namespace Backend.Patterns;
+
+//public class IBaseModel{}
+
+//public interface IRepositoryStrategy<T> where T : IBaseModel
+//{
+//    void Add(T entity);
+//    T? GetById(int id);
+//    IEnumerable<T> GetAll();
+//}
+//public class EventRepository : IRepositoryStrategy<Event>
+//{
+
+//}
+
+//public class TeamRepository
+//{
+
+//}
+
+//public class VenueRepository
+//{
+
+//}

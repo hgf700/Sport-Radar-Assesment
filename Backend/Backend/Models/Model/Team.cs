@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models;
+namespace Backend.Models.Model;
 
 [Index(nameof(NameOfTeam), IsUnique = true)]
 public class Team

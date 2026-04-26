@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models;
+namespace Backend.Models.Model;
 
 [Index(nameof(_SportId))]
 [Index(nameof(_VenueId))]
 [Index(nameof(_HomeTeamId))]
 [Index(nameof(_AwayTeamId))]
-public class Event : IBaseModel
+public class Event 
 {
     [Key]
     public int Id { get; set; }

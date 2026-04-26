@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Backend.Models;
+using Backend.Models.Model;
 
 namespace Backend.DB;
 

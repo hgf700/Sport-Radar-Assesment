@@ -1,6 +1,6 @@
 ﻿using Backend.DB;
-using Backend.Models;
 using Backend.Models.Dto;
+using Backend.Models.Model;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
