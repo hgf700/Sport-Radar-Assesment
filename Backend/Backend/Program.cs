@@ -25,10 +25,10 @@ var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 var connectionString =
   $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
 
-if (string.IsNullOrEmpty(host))
-{
-    throw new Exception("POSTGRES_HOST is not set");
-}
+// if (string.IsNullOrEmpty(host))
+// {
+//     throw new Exception("POSTGRES_HOST is not set");
+// }
 
 var env = builder.Environment;
 
