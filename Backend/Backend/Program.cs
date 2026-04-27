@@ -13,7 +13,22 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // connection string
-var connectionString = builder.Configuration.GetConnectionString("Default");
+//var connectionString = builder.Configuration.GetConnectionString("Default");
+
+//data from .env
+var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+var db = Environment.GetEnvironmentVariable("POSTGRES_DB");
+var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
+var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+
+var connectionString =
+  $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
+
+if (string.IsNullOrEmpty(host))
+{
+    throw new Exception("POSTGRES_HOST is not set");
+}
 
 var env = builder.Environment;
 
@@ -27,7 +42,8 @@ else
 {
     // DEV / PROD → PostgreSQL
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseNpgsql(connectionString));
+        options.UseNpgsql(connectionString, o =>
+        o.EnableRetryOnFailure()));
 }
 
 // CORS

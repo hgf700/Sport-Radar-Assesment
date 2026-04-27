@@ -4,8 +4,7 @@
 **/.env
 opinia/
 useful/
-
-**/TestResults/
+**/.gitignore
+**/Migrations/
+**/.angular/
 **/node_modules/
-**/dist/
-**/coverage/

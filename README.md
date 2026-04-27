@@ -89,3 +89,10 @@ npm start
 ```
 
 ## Docker Setup
+1. Copy environment file and fill required fields:
+```bash
+cp Backend/Backend/.env.example Backend/Backend/.env
+git clone https://github.com/hgf700/Sport-Radar-Assesment
+cd Sport-Radar-Assesment
+docker compose up --build
+```

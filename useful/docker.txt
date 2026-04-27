@@ -1,0 +1,18 @@
+#tworz docker
+docker compose up --build
+
+# pelny rebuild dla front
+#wylaczenei docker compose down
+#wlaczenie docker compose up
+docker compose down
+docker compose build --no-cache frontend
+docker compose up
+
+#usuwa
+docker compose down -v
+
+#aktywne sprawdza
+docker compose ps
+
+#sprawdzenie dany contener
+docker compose exec frontend sh
