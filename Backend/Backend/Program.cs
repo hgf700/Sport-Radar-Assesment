@@ -17,18 +17,13 @@ builder.Services.AddOpenApi();
 
 //data from .env
 var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
-var db = Environment.GetEnvironmentVariable("POSTGRES_DB");
+var database = Environment.GetEnvironmentVariable("POSTGRES_DB");
 var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
 var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 
 var connectionString =
-  $"Host={host};Port={port};Database={db};Username={user};Password={pass}";
-
-// if (string.IsNullOrEmpty(host))
-// {
-//     throw new Exception("POSTGRES_HOST is not set");
-// }
+  $"Host={host};Port={port};Database={database};Username={user};Password={pass}";
 
 var env = builder.Environment;
 
@@ -98,6 +93,21 @@ app.UseAuthorization();
 app.UseCors("Prod");
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    try
+    {
+        db.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Migration failed: {ex.Message}");
+        throw;
+    }
+}
 
 app.Run();
 
