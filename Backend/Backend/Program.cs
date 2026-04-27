@@ -12,33 +12,26 @@ DotNetEnv.Env.Load();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// connection string
-//var connectionString = builder.Configuration.GetConnectionString("Default");
-
-//data from .env
-var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
-var database = Environment.GetEnvironmentVariable("POSTGRES_DB");
-var user = Environment.GetEnvironmentVariable("POSTGRES_USER");
-var pass = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
-
-var connectionString =
-  $"Host={host};Port={port};Database={database};Username={user};Password={pass}";
-
 var env = builder.Environment;
 
+// ⭐ TEST ENV DECISION (tylko tu, bez SetEnvironmentVariable!)
 if (env.IsEnvironment("Testing"))
 {
-    // TESTS → InMemory DB
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseInMemoryDatabase("TestDb"));
 }
 else
 {
-    // DEV / PROD → PostgreSQL
+    // używaj tylko IConfiguration — NIE Environment.GetEnvironmentVariable
+
+    var connectionString = builder.Configuration.GetConnectionString("Default");
+
+    if (string.IsNullOrWhiteSpace(connectionString))
+        throw new Exception("Missing connection string 'Default'");
+
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(connectionString, o =>
-        o.EnableRetryOnFailure()));
+            o.EnableRetryOnFailure()));
 }
 
 // CORS
@@ -48,8 +41,7 @@ builder.Services.AddCors(options =>
         policy => policy
             .WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
-            .AllowAnyHeader()
-    );
+            .AllowAnyHeader());
 });
 
 // RATE LIMITING
@@ -83,19 +75,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
 app.UseRateLimiter();
-
 app.UseAuthorization();
-
 app.UseCors("Prod");
-
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
+// DB MIGRATION (tylko nie-test)
+if (!app.Environment.IsEnvironment("Testing"))
 {
+    using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
     try
@@ -111,5 +100,4 @@ using (var scope = app.Services.CreateScope())
 
 app.Run();
 
-// potrzebne dla WebApplicationFactory dla test
 public partial class Program { }
