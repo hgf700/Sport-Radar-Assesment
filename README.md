@@ -95,6 +95,7 @@ If you're running the project for the first time locally, apply EF Core migratio
 
 ```bash
 cd Sport-Radar-Assesment/Backend/Backend
+dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
