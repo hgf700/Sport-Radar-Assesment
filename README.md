@@ -72,10 +72,9 @@ The frontend was built using Angular and includes:
 ### ▶️ How to Run
 
 ## Environment Setup
-- Create a new .env file based on `.env.example` (only for docker)
-- Fill in the required values to enable database migrations and data retrieval
 - Run the following commands to apply database migrations:
-```bash 
+```bash
+cd Sport-Radar-Assesment/Backend/Backend
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
