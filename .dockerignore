@@ -5,6 +5,5 @@
 opinia/
 useful/
 **/.gitignore
-**/Migrations/
 **/.angular/
 **/node_modules/

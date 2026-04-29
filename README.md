@@ -88,11 +88,27 @@ cd Frontend/front
 npm start
 ```
 
-## Docker Setup
-1. Copy environment file and fill required fields:
+## 🐳 Docker Setup
+
+### 1. Database setup (migrations)
+If you're running the project for the first time locally, apply EF Core migrations:
+
 ```bash
-cp Backend/Backend/.env.example Backend/Backend/.env
-git clone https://github.com/hgf700/Sport-Radar-Assesment
-cd Sport-Radar-Assesment
+cd Sport-Radar-Assesment/Backend/Backend
+dotnet ef database update
+```
+
+### 2. Run the application with Docker
+```bash
 docker compose up --build
+```
+
+### 3. 🚀 Application URLs
+Frontend (Angular)
+```bash
+http://localhost:4200/
+```
+Backend (.NET API)
+```bash
+http://localhost:5000/event/show-events
 ```
